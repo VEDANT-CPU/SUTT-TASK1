@@ -1,0 +1,59 @@
+import pandas as pd
+import json
+from dataclasses import dataclass
+# reading tabular data from excel
+class Schedule:
+    course_code: int
+    course_title: str
+    credit_structure: int
+    section_type: str
+    section_number: str
+    instructors: str
+    room: int
+    day: str
+    slots: int
+
+def encoder_schedule(schedule):
+    return [
+  {
+    "course_code": "GS F245",
+    "course_title": "EFFECTIVE PUBLIC SPEAK",
+    "credits": {
+      "lecture": 2,
+      "practical": 1,
+      "units": 3
+    },
+    "sections": [
+      {
+        "section_type": "lecture",
+        "section_number": "L1",
+        "instructors": ["PUSHP LATA", "Apoorv Kumar(RS)"],
+        "room": "6163",
+        "timing": [
+          {
+            "day": "T",
+            "slots": [10, 11]
+          },
+          {
+            "day": "Th",
+            "slots": [10, 11]
+          },
+          {
+            "day": "F",
+            "slots": [10, 11]
+          }
+        ]
+      }
+    ]
+  }
+]
+
+    
+
+timetable = pd.read_excel(r"C:\Users\VEDANT\Downloads\Timetable Workbook - SUTT Task 1.xlsx", sheet_name=None, usecols="A,C,D,E,F,G,H,I,J,K")
+# extracting data from desired columns from timetable excel sheet
+print(timetable) # the data from excel workbook parsed and converted to dataframes.
+
+
+
+
