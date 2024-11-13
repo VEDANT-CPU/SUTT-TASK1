@@ -13,8 +13,12 @@ class Schedule:
     day: str
     slots: int
 
-
+timetable = pd.read_excel(r"C:\Users\VEDANT\Downloads\Timetable Workbook - SUTT Task 1.xlsx", sheet_name=None, usecols="A,C,D,E,F,G,H,I,J,K")
+print()
+print(timetable)
+print()
 def encoder_schedule(schedule):
+ if isinstance(schedule, Schedule):
     return [
   {
     "course_code": schedule["COM COD"] ,
@@ -28,14 +32,13 @@ def encoder_schedule(schedule):
         "room": schedule["ROOM"],
         "timing":  schedule["TIME-SLOT"]
          }
-      }
-    ]
+      
+    
   }
 ]
-
+raise TypeError(f'Object {schedule} is not of type Schedule')
     
 
-timetable = pd.read_excel(r"C:\Users\VEDANT\Downloads\Timetable Workbook - SUTT Task 1.xlsx", sheet_name=None, usecols="A,C,D,E,F,G,H,I,J,K")
 
 jsonified_timetable = json.dumps(timetable, default=encoder_schedule)
 # extracting data from desired columns from timetable excel sheet
