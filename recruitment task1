@@ -13,36 +13,21 @@ class Schedule:
     day: str
     slots: int
 
+
 def encoder_schedule(schedule):
     return [
   {
-    "course_code": "GS F245",
-    "course_title": "EFFECTIVE PUBLIC SPEAK",
-    "credits": {
-      "lecture": 2,
-      "practical": 1,
-      "units": 3
-    },
-    "sections": [
+    "course_code": schedule["COM COD"] ,
+    "course_title": schedule["COURSE TITLE"],
+    "credits": schedule["CREDIT"],
+    "sections": 
       {
-        "section_type": "lecture",
-        "section_number": "L1",
-        "instructors": ["PUSHP LATA", "Apoorv Kumar(RS)"],
-        "room": "6163",
-        "timing": [
-          {
-            "day": "T",
-            "slots": [10, 11]
-          },
-          {
-            "day": "Th",
-            "slots": [10, 11]
-          },
-          {
-            "day": "F",
-            "slots": [10, 11]
-          }
-        ]
+        "section_type": schedule["SECTION TYPE"],
+        "section_number": schedule["SEC"],
+        "instructors": schedule["INSTRUCTOR-IN-CHARGE / Insturctor"],
+        "room": schedule["ROOM"],
+        "timing":  schedule["TIME-SLOT"]
+         }
       }
     ]
   }
@@ -51,8 +36,11 @@ def encoder_schedule(schedule):
     
 
 timetable = pd.read_excel(r"C:\Users\VEDANT\Downloads\Timetable Workbook - SUTT Task 1.xlsx", sheet_name=None, usecols="A,C,D,E,F,G,H,I,J,K")
+
+jsonified_timetable = json.dumps(timetable, default=encoder_schedule)
 # extracting data from desired columns from timetable excel sheet
-print(timetable) # the data from excel workbook parsed and converted to dataframes.
+print("json format output of the parsed excel file is ")
+print(jsonified_timetable) 
 
 
 
